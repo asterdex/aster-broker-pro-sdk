@@ -1,27 +1,25 @@
 # Asterdex Broker Web SDK
 
-- [AWS Onboarding Process](#aws-onboarding-process)
-- [Download the Latest SDK](#download-the-latest-sdk-v174)
+- [AWS onboarding process](#aws-onboarding-process)
+- [Download the latest SDK](#download-the-latest-sdk-v174)
 - [Configs](#configs)
 - [Events](#events)
-- [Color Palette](#color-palette)
-- [Proxy Setup](#proxy-setuponly-if-you-change-the-api-domain-in-sdk)
+- [Proxy setup](#proxy-setuponly-if-you-change-the-api-domain-in-sdk)
 - [FAQ](#faq)
 
-## AWS Onboarding Process
+## AWS onboarding process
 
-We take AWS service as an example to demostrate the whole process that you can get onboarded.
-You can use other service on other cloud platform of course.
+We’ll use AWS as an example to demonstrate the onboarding process. You can, of course, use other cloud platforms as well.
 
-Before we start, make sure you set up AWS CLI [https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+Before starting, make sure you have AWS CLI installed: [https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
-### Step1. Upload SDK
+### Step 1: Upload SDK
 
-Download the latest version of SDK zip file in [Releases](https://github.com/asterdex/aster-broker-pro-sdk/releases).
+Download the latest version of SDK zip file from [Releases](https://github.com/asterdex/aster-broker-pro-sdk/releases).
 
 ![download-link](./docs/images/download-link.png)
 
-Unzip the file and upload those 2 folders(static, sdk) to AWS S3 space.
+Unzip the file and upload the two folders (static and sdk) to your AWS S3 bucket.
 
 ```sh
 wget <zip-url> # download zip file from github
@@ -38,7 +36,7 @@ aws s3 sync ./static s3://asterdex-s3-test/static --grants read=uri=http://acs.a
 
 ```
 
-### Step2. Initialize SDK
+### Step 2: Initialize SDK
 
 ```sh
 # initialize npm and packages
@@ -46,7 +44,7 @@ npm init
 npm install local-web-server
 ```
 
-create `lws.config.js` and paste below
+Create a file named `lws.config.js` and paste the following content into it:
 
 ```js
 module.exports = {
@@ -73,8 +71,8 @@ module.exports = {
 };
 ```
 
-Create a index.html(can be skipped if you already have)
-Import the static files that you just uploaded and init the trading page.
+Create an index.html file (you can skip this step if you already have one).
+Import the static files you just uploaded and initialize the trading page.
 
 ```html
 <!DOCTYPE html>
@@ -136,7 +134,7 @@ Import the static files that you just uploaded and init the trading page.
 
 ### Mock White List
 
-For development, you have to mock the whitelist API with [ajax interceptor extension](https://chrome.google.com/webstore/detail/ajax-interceptor/nhpjggchkhnlbgdfcbgpdpkifemomkpg), the response should be
+For development, you have to mock the whitelist API with [ajax interceptor extension](https://chrome.google.com/webstore/detail/ajax-interceptor/nhpjggchkhnlbgdfcbgpdpkifemomkpg), the response should be:
 
 ```
 {
@@ -151,27 +149,26 @@ For development, you have to mock the whitelist API with [ajax interceptor exten
 
 ![./docs/images/ajax-interceptor.png](./docs/images/ajax-interceptor.png)
 
-Then, run the local server and open [http://127.0.0.1:3333](http://127.0.0.1:3333/), you will see your exchange website is ready!
+Then, run the local server and open [http://127.0.0.1:3333](http://127.0.0.1:3333/) in your browser. You should see your exchange website is ready!
 
 ```
 ./node_modules/.bin/ws --port 3333
 ```
 
-### Step3.Deploy
+### Step 3: Deploy
 
-Deploy the index.html to AWS sever under your domain and make sure your domain is already in the whitelist.
+Deploy the index.html to your AWS server under your domain and make sure your domain is already in the whitelist.
 
-Now, you can visit trading page.
+You can now visit the trading page.
 
 ```sh
 aws s3 cp ./index.html s3://asterdex-s3-test/index.html --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
 
 ```
 
-## Download the Latest SDK (v1.7.4)
+## Download the latest SDK (v1.7.4)
 
-You can find SDK in the release list
-Releases list: [https://github.com/asterdex/aster-broker-pro-sdk/releases](https://github.com/asterdex/aster-broker-pro-sdk/releases), and download the latest zip file
+You can find the SDK in the Releases list: [https://github.com/asterdex/aster-broker-pro-sdk/releases](https://github.com/asterdex/aster-broker-pro-sdk/releases). Download the latest zip file.
 
 ![download-link](./docs/images/download-link.png)
 
@@ -281,19 +278,19 @@ type Config = {
 
 ### staticBaseUrl
 
-the base url of your static files, for example: the complete url of um_futures.{version}.html would be: `${staticBaseUrl}um_futures.{version}.html`
+The base URL of your static files. For example, the full URL of um_futures.{version}.html would be: `${staticBaseUrl}um_futures.{version}.html`
 
 ### apiBaseUrl
 
-the base url of the api calls, for example: `${apiBaseUrl}/fapi/v1/exchangeInfo`
+The base URL for API calls. For example: `${apiBaseUrl}/fapi/v1/exchangeInfo`
 
 ### i18nBaseUrl
 
-the i18n base url
+The i18n base URL.
 
 ### configBaseUrl
 
-the config base url
+The config base URL.
 
 ### lightPalette, darkPalette
 
@@ -352,15 +349,15 @@ type PaletteInterface = {
 
 ### defaultFavoriteSymbols
 
-the default favorites symbol
+The default favorite symbols.
 
 ### enableToggleTheme
 
-whether user can change the theme.
+Whether users can change the theme.
 
 ### supportNetworks
 
-default is ['bnb']
+The default is ['bnb'].
 
 ```ts
 export type SupportedNetwork = "bnb" | "eth" | "arb" | "base";
@@ -368,7 +365,7 @@ export type SupportedNetwork = "bnb" | "eth" | "arb" | "base";
 
 ### supportLanguages
 
-default is all languages
+The default is all languages.
 
 ```ts
 export type SupportedLanguage =
@@ -391,7 +388,7 @@ export type SupportedLanguage =
 
 ### headerConfig
 
-the config to set up header
+The configuration for setting up the header.
 
 ```ts
 // all navTo support `%lng%` placeholder, can be relpaced with language
@@ -467,7 +464,7 @@ tokenNetwork: 'arb1',
 
 ### footerConfig
 
-the config to set up footer
+The configuration for setting up the footer.
 
 ```ts
 type FooterConfig = {
@@ -477,14 +474,13 @@ type FooterConfig = {
 
 ### orderTypeInfoUrl
 
-the info url of order types
+The info URL of order types.
 
 ### shareImgFolder
 
 default value: `static/images/share-poster`
 
-set up the images for share poster
-the image list:
+Set up the images for the share poster. The image list:
 
 - `${shareImgFolder}/light_logo.png`
 - `${shareImgFolder}/dark_logo.png`
@@ -499,7 +495,7 @@ the image list:
 
 ### loadingImage
 
-the loading image config, it will show before the trade page render
+The loading image configuration. This image will be shown before the trade page renders.
 
 ```ts
 type LoadingImage = {
@@ -511,7 +507,7 @@ type LoadingImage = {
 
 ### notificationPosition
 
-the position of all notification toast
+The position for all notification toasts.
 
 ```ts
 type NotificationPosition = {
@@ -522,23 +518,23 @@ type NotificationPosition = {
 
 ### defaultTheme
 
-to configure the initial theme value, theme value will then be stored in cookies with key 'theme'
+Configure the initial theme value. The selected theme will be stored in cookies with the key 'theme'.
 
 ### fontFamily
 
-same as https://www.w3schools.com/cssref/pr_font_font-family.asp
+Same as https://www.w3schools.com/cssref/pr_font_font-family.asp
 
 ### fontUrl
 
-the url of the custom font
+The URL of the custom font.
 
 ### proGridLayoutMargin
 
-margin between each widget in px, format as [x, y]
+Margin between each widget in px; the format is [x, y].
 
 ### variants
 
-experimental feature, for customized style
+Experimental feature for customized styles.
 
 ```ts
 type Variants = {
@@ -575,7 +571,7 @@ variants: {
 
 ## Events
 
-We also support several event to let u can customize the exchange more flexible
+We also support several events to let you further customize the exchange.
 
 ```js
 FuturesSDK.eventListener.on("login", () => conosle.log("login"));
@@ -605,10 +601,9 @@ FuturesSDK.eventListener.on("lngChange", (data) => {
 
 ## Color Palette
 
-[https://www.figma.com/file/OH3FtJJ8I7EbVNrG6bupIs/Broker-Color-Usage?node-id=0%3A1](https://www.figma.com/file/OH3FtJJ8I7EbVNrG6bupIs/Broker%E2%80%A8-Color-Usage?node-id=0%3A1)
-password: 0706
+[https://www.figma.com/design/9dUDUHgsJI4mKvRvwfGQQz/Aster-Branding?node-id=25-84&t=Wz7o70tBaURpFigK-0](https://www.figma.com/design/9dUDUHgsJI4mKvRvwfGQQz/Aster-Branding?node-id=25-84&t=Wz7o70tBaURpFigK-0)
 
-## Proxy Setup(only if you change the API domain in SDK)
+## Proxy setup (only if you change the API domain in the SDK)
 
 ### API
 
@@ -639,61 +634,60 @@ Set `config.enableThemeToggle` to false.
 
 Set `config.fontFamily`, or set `config.fontUrl` for custom font.
 
-### Q:How to set the price display on the navigation bar?
+### Q: How to set the price display on the navigation bar?
 
 There are few configs related to the price display:
 
-- `config.headerConfig.token.pricePrecision`: the precision u want to display
-- `config.headerConfig.token.lpPairAddress`: the contract address of the pair in liquidity pool, for example: 0xa0ee789a8f581cb92dd9742ed0b5d54a0916976c is the address of APX/BUSD in pancake pool
-- `config.headerConfig.token.lpBaseAddress`: the base asset address in the lp pair
-- `config.headerConfig.token.lpQuoteAddress`: the quote asset address in the lp pair
+- `config.headerConfig.token.pricePrecision`: the number of decimal places to display.
+- `config.headerConfig.token.lpPairAddress`: the contract address of the liquidity pool pair. Example: 0xa0ee789a8f581cb92dd9742ed0b5d54a0916976c is the address for the APX/BUSD pair in Pancake Pool.
+- `config.headerConfig.token.lpBaseAddress`: the base asset address in the LP pair.
+- `config.headerConfig.token.lpQuoteAddress`: the quote asset address in the LP pair.
 
-Before is only need if you want to compute twice. For Cake token which has configured CAKE/USDT lp, add BUSD/USDT lp here, then you can get USDT price of CAKE
+The section above is only needed if you want to perform a two-step price calculation. For example, if the CAKE token already has a CAKE/USDT LP configured, you can add a BUSD/USDT LP here to derive the CAKE price in USDT.
 
-- `config.headerConfig.token.quote.lpPairAddress`: the contract address of the pair in liquidity pool, for example: 0xa0ee789a8f581cb92dd9742ed0b5d54a0916976c is the address of APX/BUSD in pancake pool
-- `config.headerConfig.token.quote.lpBaseAddress`: the base asset address in the lp pair
-- `config.headerConfig.token.quote.lpQuoteAddress`: the quote asset address in the lp pair
+- `config.headerConfig.token.quote.lpPairAddress`: the contract address of the pair in the liquidity pool. Example: 0xa0ee789a8f581cb92dd9742ed0b5d54a0916976c is the address of APX/BUSD in Pancake Pool.
+- `config.headerConfig.token.quote.lpBaseAddress`: the base asset address in the LP pair.
+- `config.headerConfig.token.quote.lpQuoteAddress`: the quote asset address in the LP pair.
 
 ### Q: How to change title or favicon?
 
-Our SDK just generates an iframe into your specified DOM, so you can change the title or favicon in your HTML as normal. See [w3school](​​https://www.w3schools.com/howto/howto_html_favicon.asp)
+The SDK inserts an iframe into your specified DOM. You can modify the title or favicon in your HTML as usual. See [w3school](​​https://www.w3schools.com/howto/howto_html_favicon.asp)
 
-### Q: How to change the logo on the header? How to add the url on logo?
+### Q: How to change the logo in the header and add a link to it?
 
-Since we have two themes, dark and light, and also care about the RWD, we have 5 configs related to the logo.
+Since we support both dark and light themes, as well as responsive design (RWD), there are 5 configuration options for the logo:
 
-- `config.headerCnfig.logo.darkImgUrl`: the image url for dark theme
-- `config.headerCnfig.logo.lightImgUrl`: the image url for light theme
+- `config.headerCnfig.logo.darkImgUrl`: image URL for dark theme.
+- `config.headerCnfig.logo.lightImgUrl`: image URL for light theme.
 
-### Q: How to change border-radius of the widgets
+### Q: How to change border-radius of the widgets?
 
 Use `config.variants.widget.default` to change the style of the widgets.
 
-### Q: Hot to migrate to latest SDK
+### Q: How to migrate to the latest SDK?
 
 1. Go to [releases](https://github.com/asterdex/aster-broker-pro-sdk/releases) and download the latest SDK zip.
-2. Unzip the file, and upload to your CDN.
-3. Update the sdk version in your HTML file `<script src="/sdk/sdk.1.7.4.js"></script>`
+2. Unzip the file and upload to your CDN.
+3. Update the SDK version in your HTML file `<script src="/sdk/sdk.1.7.4.js"></script>`
 
-### Q: What are the `br` and `gz`
+### Q: What are the `br` and `gz`?
 
 `br` => `brotil`
 `gz` => `gzip`
 
-They are the two most common compression algorithms, widely used in modern web. They help user can download data faster.
-Check out the article to know more: https://www.siteground.com/blog/brotli-vs-gzip-compression/
+These are two of the most common compression algorithms, widely used on the modern web. They help users download data faster. Check out this article to learn more: https://www.siteground.com/blog/brotli-vs-gzip-compression/
 
 ### Q: How to use `br` and `gz` static file
 
-Same as before, just ensure you download the `br.zip` or `gz.zip` version.
+Same as before, but make sure to download the `br.zip` or `gz.zip` version.
 
 1. Go to [releases](https://github.com/asterdex/aster-broker-pro-sdk/releases) and download the latest SDK zip file.
 2. Unzip the file, and upload to your CDN.
-3. Update the sdk version in your HTML file `<script src="/sdk/sdk.1.7.4.js"></script>`
+3. Update the SDK version in your HTML file `<script src="/sdk/sdk.1.7.4.js"></script>`
 
-### Q: How to integrate the sdk with customized url (e.g. /en/futures/BTCUSDT)
+### Q: How to integrate the SDK with a customized URL (e.g. /en/futures/BTCUSD)?
 
-1. Make sure `/:lng/futures/:symbol` can redirect to your html. Normally, this is configured by your infra team.
+1. Make sure `/:lng/futures/:symbol` can redirect to your HTML. This is usually handled by your infra team.
 2. Parse the url to get `lng`, `symbol`
 
 ```js
@@ -706,7 +700,7 @@ function getSymbolFromUrl() {
 }
 ```
 
-3. Give the SDK lng and symbol that you get from url
+3. Pass the lng and symbol values extracted from the URL to the SDK.
 
 ```js
 FuturesSDK.createTradeUI({
@@ -718,7 +712,7 @@ FuturesSDK.createTradeUI({
 });
 ```
 
-4. Listen `lngChange` and `symbolChange` events, to change the pathname when lng or symbol changes.
+4. Listen to `lngChange` and `symbolChange` events to update the pathname when lng or symbol changes.
 
 ```js
 FuturesSDK.eventListener.on("symbolChange", (data) => {
