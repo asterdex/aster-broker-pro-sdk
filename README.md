@@ -7,6 +7,30 @@
 - [Proxy setup](#proxy-setuponly-if-you-change-the-api-domain-in-sdk)
 - [FAQ](#faq)
 
+# Why Integrate with Aster Perps
+
+**Better commercial deal**
+- Industry-leading revenue share
+- Full control over added spread & fees
+- We can support your referral system upon request
+
+**Best experience for users**
+- Lowest trading fees
+- Tight ticks and deep liquidity across all pairs
+- Multi-chain native support — BSC, ETH, SOL, and ARB networks
+- Cross-collateral support — more flexibility for your users
+- Access to stocks and other asset classes (fully crypto-settled)
+
+**Built for flexibility**
+- Request custom trading pairs
+- Support for both pro and simple UI modes
+- Fast integration with our proven broker SDK
+
+**Trusted model**
+- Broker models already live with partners
+- Optional co-marketing and trading campaigns
+- Hands-on support from the Aster team at every step
+
 ## AWS onboarding process
 
 We’ll use AWS as an example to demonstrate the onboarding process. You can, of course, use other cloud platforms as well.
