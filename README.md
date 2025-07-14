@@ -31,6 +31,8 @@
 - Optional co-marketing and trading campaigns
 - Hands-on support from the Aster team at every step
 
+Interested? [https://docs.google.com/forms/d/e/1FAIpQLSeUIisZO5wVYC1rLDT5wf0aKT3RTQt_G4KuPH22amjjA7AFpg/viewform?usp=sharing&ouid=115093722732998827513](Get in touch).
+
 ## AWS onboarding process
 
 We’ll use AWS as an example to demonstrate the onboarding process. You can, of course, use other cloud platforms as well.
